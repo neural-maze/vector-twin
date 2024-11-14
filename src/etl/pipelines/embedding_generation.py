@@ -3,8 +3,10 @@ from steps import (generate_embeddings, load_hf_dataset,  # type: ignore
                    sample_dataset)
 from zenml import pipeline
 from zenml.config import DockerSettings
+from zenml.config.docker_settings import DockerBuildConfig
 
-docker_settings = DockerSettings(build_config={"dockerignore": ".dockerignore"})
+
+docker_settings = DockerSettings(build_config=DockerBuildConfig(dockerignore=".dockerignore"))
 
 
 @pipeline(settings={"docker": docker_settings})
