@@ -10,7 +10,7 @@ from tqdm import tqdm  # type: ignore
 from zenml import step
 from zenml.logger import get_logger
 
-from settings import settings
+from settings import settings  # type: ignore
 
 
 logger = get_logger(__name__)
@@ -42,7 +42,7 @@ def initialize_qdrant_client(use_qdrant_cloud: bool = True) -> QdrantClient:
             port=settings.QDRANT_PORT
         )
     
-    if qdrant_client.get_collection(settings.QDRANT_COLLECTION_NAME) is None:
+    if not qdrant_client.collection_exists(settings.QDRANT_COLLECTION_NAME):
         qdrant_client.create_collection(
             collection_name=settings.QDRANT_COLLECTION_NAME,
             vectors_config=VectorParams(
