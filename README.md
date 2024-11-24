@@ -153,3 +153,34 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - FaceNet for face embedding generation
 - Qdrant for vector similarity search
 - ZenML for pipeline orchestration
+
+
+### Google Cloud Authentication
+
+1. Install the Google Cloud SDK:
+   - Visit [Google Cloud SDK Installation Guide](https://cloud.google.com/sdk/docs/install)
+   - Follow the installation instructions for your operating system
+
+2. Authenticate with Google Cloud:
+   ```bash
+   gcloud auth application-default login
+   ```
+
+3. Set your Google Cloud project:
+   ```bash
+   gcloud config set project your-project-id
+   ```
+
+4. Ensure you have the necessary permissions:
+   - Storage Object Creator (`roles/storage.objectCreator`)
+   - Storage Bucket Creator (`roles/storage.admin`)
+
+You can verify your authentication by running:
+
+```bash
+gcloud auth login
+```
+gcloud config set project vector-twin
+
+
+zenml service-account create <SERVICE_ACCOUNT_NAME>
