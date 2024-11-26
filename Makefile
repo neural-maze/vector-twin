@@ -23,6 +23,6 @@ stop-local-app:
 	docker compose -f docker-compose.yml down
  
  # Run prod app
-start-app: run-pipeline-qdrant-cloud
+insert-embeddings-qdrant-cloud: configure-zenml
 	@echo "Running embedding pipeline with Qdrant Cloud..."
 	PYTHONPATH=src python src/embedding_pipeline/run.py --use-qdrant-cloud
