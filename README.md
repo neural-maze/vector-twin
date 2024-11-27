@@ -5,6 +5,12 @@
 </h3>
 </p>
 
+> No LangChain, no LangGraph, no LlamaIndex, no CrewAI. Pure and simple API calls to Groq.
+
+
+## Table of Contents
+
+
 ## 🎯 Overview 🎯
 
 Twin Celebrity App is a machine learning project that uses face embeddings and vector similarity search to find celebrity lookalikes. The project combines the following technologies:
@@ -24,7 +30,7 @@ The project is built around the following components:
 
 The embedding generation pipeline is responsible for extracting face embeddings from the celebrities images. It uses the FaceNet architecture to generate the embeddings and stores them in a Qdrant vector database. The pipeline is orchestrated using ZenML.
 
-You can find the ZenML pipeline here: [embedding_generation_pipeline](src/embedding_pipeline/pipeline.py).
+You can find the ZenML pipeline here: [embedding_generation_pipeline](src/embedding_pipeline/pipeline.py). 
 
 The ZenML pipeline is configured to use either a local Qdrant instance or a Qdrant Cloud instance, depending on the `use_qdrant_cloud` flag. It's composed of the following steps: 
 
@@ -89,8 +95,7 @@ You can use the `.env.example` file as a template. Simply copy it to `.env` and 
 
 ### ZenML Setup
 
-Initialize ZenML and set up the default stack:
-
+First of all, you'll need to login to ZenML cloud and create a new tenant. After that, you can initialize he ZenML CLI and set up the default stack - that's basically what is happening in the `configure-zenml` command.
 ```bash
 make configure-zenml
 ```

@@ -29,9 +29,7 @@ if not st.session_state.matched_celebrity:
     with st.sidebar:
         st.image(LOGO)
         st.markdown("<h1 style='text-align: center;'>Celebrity Twin</h1>", unsafe_allow_html=True)
-        st.markdown("<h3 style='text-align: center;'>Find your celebrity twin</h3>", unsafe_allow_html=True)
-        st.markdown("<hr style='border-color: rgba(255,255,255,0.2);'>", unsafe_allow_html=True)
-        st.markdown("<h3 style='text-align: center;'>Upload an image</h3>", unsafe_allow_html=True)
+        st.markdown("<p style='text-align: center; font-style: italic; color: #888;'>Because everyone deserves to know which famous person<br>they could've been if their parents had better connections 😉</p>", unsafe_allow_html=True)
         
     enable = st.checkbox("Enable Camera", help="Click to enable/disable camera")
     img_file_buffer = st.camera_input("Take a picture", disabled=not enable)
