@@ -4,7 +4,7 @@
 </h3>
 </p>
 
-> No LangChain, no LangGraph, no LlamaIndex, no CrewAI. Pure and simple API calls to Groq.
+>  Because everyone deserves to know which famous person they could've been if their parents had better connections 😉
 
 
 ## Table of Contents
