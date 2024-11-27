@@ -1,8 +1,12 @@
+import logging
+
 from qdrant_client import QdrantClient  # type: ignore
 from qdrant_client.http.models import PointStruct
 from qdrant_client.models import Distance, VectorParams  # type: ignore
+
 from vector_twin.settings import settings  # type: ignore
 
+logger = logging.getLogger(__name__)
 
 def create_collection(qdrant_client: QdrantClient,
                       collection_name: str = settings.QDRANT_COLLECTION_NAME,
@@ -46,16 +50,19 @@ def insert_image_embedding(
         collection_name (str, optional): Name of collection to insert into.
             Defaults to settings.QDRANT_COLLECTION_NAME.
     """
-    qdrant_client.upsert(
-        collection_name=collection_name,
-        points=[
-            PointStruct(
-                id=img_id, 
-                vector=img_embedding, 
-                payload={"label": img_label}
-            )
-        ]
-    )
+    try:
+        qdrant_client.upsert(
+            collection_name=collection_name,
+            points=[
+                PointStruct(
+                    id=img_id, 
+                    vector=img_embedding, 
+                    payload={"label": img_label}
+                )
+            ]
+        )
+    except Exception as e:
+        logger.error(f"Error inserting image embedding: {e}")
 
 def get_top_k_similar_images(
     qdrant_client: QdrantClient,
