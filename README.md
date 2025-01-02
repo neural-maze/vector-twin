@@ -10,46 +10,83 @@
 
 ## Table of Contents
 
+- [1. Introduction](#introduction)
+- [2. Project Design](#project-design)
+    - [2.1 Embedding Generation Pipeline](#embedding-generation-pipeline)
+    - [2.2 Streamlit UI](#streamlit-ui)
+    - [2.3 Vector Twin Package](#vector-twin-package)
 
-## 🎯 Overview 🎯
+- [3. Prerequisites](#prerequisites)
+- [4. Installation](#installation)
+- [5. Configuration](#configuration)
+- [6. Running the project locally](#running-the-project-locally)
+- [7. Running the project with cloud deployment](#running-the-project-with-cloud-deployment)
+- [8. License](#license)
+- [9. Contributing](#contributing)
+
+
+
+## Introduction
 
 Twin Celebrity App is a machine learning project that uses face embeddings and vector similarity search to find celebrity lookalikes. The project combines the following technologies:
 
-- **FaceNet** embeddings for the celebrities faces
-- **Qdrant** for vector similarity search
-- **ZenML** for pipeline orchestration
-- **Streamlit** for the user interface
-- **Google Cloud Run** for deployment (optional)
+- [FaceNet](https://github.com/timesler/facenet-pytorch) embeddings for the celebrities faces
+- [Qdrant](https://qdrant.tech/) for vector similarity search
+- [ZenML](https://www.zenml.io/) for pipeline orchestration
+- [Streamlit](https://streamlit.io/) for the user interface
+- [Google Cloud Run](https://cloud.google.com/run) for deployment (optional)
 
+In case you want to see the project in action, you can check out the following YouTube video:
 
-## 📐 Architecture 📐
+<div align="center">
+  <a href="https://youtu.be/LltFAum3gVg?si=lJmdCqf1MDNJl01r">
+    <img src="https://img.youtube.com/vi/LltFAum3gVg/0.jpg" alt="Watch the video" />
+  </a>
+</div>
+## Project Design 
 
 The project is built around the following components:
 
 ### Embedding Generation Pipeline
 
-The embedding generation pipeline is responsible for extracting face embeddings from the celebrities images. It uses the FaceNet architecture to generate the embeddings and stores them in a Qdrant vector database. The pipeline is orchestrated using ZenML.
+<p align="center">
+<img alt="logo" src="img/embedding_pipeline.png" width=600 />
+</p>
 
-You can find the ZenML pipeline here: [embedding_generation_pipeline](src/embedding_pipeline/pipeline.py). 
+> Check out the ZenML pipeline [here](src/embedding_pipeline/pipeline.py)!
+
+The embedding generation pipeline is responsible for extracting face embeddings from the celebrities images. It uses the FaceNet architecture to generate the embeddings and stores them in a Qdrant vector database. The pipeline is orchestrated using ZenML.
 
 The ZenML pipeline is configured to use either a local Qdrant instance or a Qdrant Cloud instance, depending on the `use_qdrant_cloud` flag. It's composed of the following steps: 
 
    - **Load the dataset**: The dataset is loaded from a Hugging Face dataset.
+
    - **Sample the dataset**: The dataset is sampled to reduce the number of embeddings to process.
+
    - **Generate the embeddings**: The embeddings are generated using the FaceNet architecture.
+
    - **Store the embeddings**: The embeddings are stored in a Qdrant vector database.
+
+   - **Store images in local filesystem**: The images are stored in your local filesystem for later use in the Streamlit application (after dockerizing the app).
 
 ### Streamlit UI
 
-The Streamlit UI is the user interface of the application. It allows you to upload an image, search for the closest celebrity lookalike and display the results. The cool thing about this UI is that you'll learn how to use your webcam as the input!
+<p align="center">
+<img alt="logo" src="img/streamlit_app.png" width=600 />
+</p>
 
-Take a look at the [app](src/app/main.py) to see how it works!
+> Check out the Streamlit UI [here](src/app/main.py)!
+
+The Streamlit UI is the user interface of the application. It allows you to upload an image, search for the closest celebrity lookalike and display the results. The cool thing about this UI is that you'll learn how to use your webcam as the input!
 
 ### Vector Twin Package
 
+> Check out the vector_twin package [here](src/vector_twin/)!
+
 The vector_twin package contains all the logic for the embedding generation pipeline and the vector search system. You'll also see some scripts to help you manage ZenML secrets generation and deployment.
 
-## 🚀 Prerequisites 🚀
+
+## Prerequisites 
 
 - Python 3.11 or higher
 - Poetry for dependency management
@@ -208,6 +245,10 @@ gcloud builds submit --region=<LOCATION>
 ```
 
 And that's it! You can now access the application by navigating to your Google Cloud Project and clicking on the Cloud Run service.
+
+<p align="center">
+<img alt="logo" src="img/cloud_run.png" width=600 />
+</p>
 
 ## License
 
