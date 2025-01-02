@@ -43,6 +43,7 @@ In case you want to see the project in action, you can check out the following Y
     <img src="https://img.youtube.com/vi/LltFAum3gVg/0.jpg" alt="Watch the video" />
   </a>
 </div>
+
 ## Project Design 
 
 The project is built around the following components:
